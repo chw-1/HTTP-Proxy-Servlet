@@ -441,10 +441,7 @@ public class ProxyServlet extends HttpServlet {
   protected void copyProxyCookie(HttpServletRequest servletRequest,
                                  HttpServletResponse servletResponse, Header header) {
     List<HttpCookie> cookies = HttpCookie.parse(header.getValue());
-    String path = getServletContext().getServletContextName();
-    if (path == null) {
-        path = "";
-    }
+    String path = servletRequest.getContextPath(); // path starts with / or is empty string
     path += servletRequest.getServletPath();
 
     for (HttpCookie cookie : cookies) {
